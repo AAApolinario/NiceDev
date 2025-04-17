@@ -1,0 +1,243 @@
+﻿<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="author" content="Betta"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Betta CTI Toolbar</title>
+		<!-- MS Dynamics -->
+		<!--<script type="text/javascript" src="js/msdyn_ciLibrary.js" data-crmurl="https://org9df8a1b0.crm2.dynamics.com/" data-cifid="CIFMainLibrary"></script>-->
+		<script type="text/javascript" src="js/msdyn_ciLibrary.js" data-crmurl="https://org7c6dd91f.crm2.dynamics.com/" data-cifid="CIFMainLibrary"></script>
+		
+        <script src="js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+        <!-- App functions and actions -->
+        <script src="js/app.min.js?versao=1"></script>
+        <!-- App styles -->
+        <link rel="stylesheet" href="css/app.min.css">
+		
+		<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="css/font-awesome.min.css"></link>   
+		<link rel="stylesheet" href="css/toolbar.css"></link> 
+		<link rel="stylesheet" href="css/chat.css"></link>        
+		<script src="js/BettaCTINICE.js?version=5"></script>
+		<script src="js/config.js?versao=5" type="text/javascript"></script>
+        <!--<script src="js/opencti_min.js" type="text/javascript"></script>-->
+        <script src="js/easytimer.min.js" type="text/javascript"></script>
+		<script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<div class="container-fluid" style="border: none;  padding: 0; margin-bottom : 0;">
+
+				<div class="col-md-12" style="border: none;  padding: 0; margin-bottom : 0;">
+					
+					<div class="form-group col-md-12">
+						<table class="table" id="status_phone" style="border: none;  padding: 0; margin-bottom : 0;">
+							<tr>
+								<td>
+									<input class="form-control" type="text" readonly=true value="" id="TXT_AGENT_NAME" />
+								</td>
+								<td>
+									<div class="form-control col-md-1" id="TXT_STATUS_">
+										<img class="hover-active" src="sf/logout_60.png" width="25" height="25"  title="Logout" id="BT_LOGOUT" onclick="javascript:Logout();"/> 
+									</div>
+								</td>
+							</tr>
+							<tr>							
+								<td>
+									<input class="form-control" type="text" class="no-outline" readonly=true value="" id="TXT_AGENT_DISPLAY" />
+								</td>							
+								<td>
+									<div class="form-control col-md-1" id="TXT_STATUS">
+										<img class="hover-active" src="img/pausa-on.svg" title="Pausar" id="pausa-on" onclick="PauseReason();" data-toggle="modal" data-target="#modalPause"/>  
+										<!--<img class="hover-active" src="img/pausa-off.svg" title="Pausar" id="pausa-off"/>-->
+										<img class="hover-active" src="sf/success_60.png" width="25" height="25"  title="Ready" id="BT_READY" onclick="javascript:Ready();"/> 
+
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+                <table id="toolbar_phone" class="table" align="center" style="background-color: #F2F2F2; color: white; border: none;  padding: 0; margin-bottom : 0;">				
+                        <tr id="toolbar" align="center">
+                            <td>
+                                <!--<img class="hover-active" src="sf/incoming_call.svg" width="30" height="30" id="" title="Atender"/>-->
+                                <img class="hover-active" src="sf/dialing_60.png" width="30" height="30" id="BtDial" title="Discar" onclick="javascript:ToMakeCall();" data-toggle="modal" data-target="#modalMakeCall"></img>
+                                <img class="hover-active" src="sf/outbound_call.svg" width="30" height="30" id="BtDialoff" title="Discar"></img>
+                                <!--<img class="hover-active" src="sf/identity_60.png" width="30" height="30" id="BtIdentity" title="Identity" onclick="javascript:Identity();"/>-->
+                                <img class="hover-active" src="sf/pause_60.png" width="35" height="30" title="Espera" id="BtHold" onclick="javascript:colocarEmEspera();"></img> 
+                                <img class="hover-active" src="sf/pause.svg" width="35" height="30" title="Espera" id="BtHoldoff"></img>						
+                                <img class="hover-active" src="sf/skip_back_60.png" width="35" height="30" title="Retorna" id="BtRetrieve"   onclick="javascript:sairDeEspera();"></img> 
+                                <img class="hover-active" src="sf/skip_back.svg" width="35" height="30" title="Retorna" id="BtRetrieveoff"></img>
+                                <img class="hover-active" src="sf/outcome_60.png" width="35" height="30" title="Transfere" id="BtTransfer"  onclick="OnTransferClick(event)"></img>	
+                                <img class="hover-active" src="sf/outcome.svg" width="35" height="30" title="Transfere" id="BtTransferoff"></img>	
+                                <img class="hover-active" src="sf/groups_60.png" width="30" height="30" title="Conferência" id="BtConference"  onclick="OnConferenceClick(event)"></img>	
+                                <img class="hover-active" src="sf/groups.svg" width="30" height="30" title="Conferência" id="BtConferenceoff"></img>
+                                <img class="hover-active" src="sf/retail_execution_60.png" width="30" height="30" title="Encerra" id="BtWrapup"  onclick="OnWrapupClick(event)"></img> 
+                                <img class="hover-active" src="sf/retail_execution.svg" width="40" height="30" title="Encerra" id="BtWrapupoff"></img>					
+                                <img class="hover-active" src="sf/end_call_60.png" width="30" height="30" id="BtHangup"  onclick="OnHangupClick(event)" title="Hangup"></img>
+                                <img class="hover-active" src="sf/end_call.svg" width="30" height="30" id="BtHangupoff" title="Hangup"></img>							
+                            </td>
+                        </tr>
+                </table>
+				
+			<!--
+			<div class="row">
+				<div class="col-md-12">
+					
+					<div class="form-group  col-md-12">
+						<input class="form-control" type="text" readonly=true value="" id="TXT_MESSAGES" />
+					</div>
+					
+				</div>
+			</div>
+			-->
+
+		</div>
+	</head>
+	<body id="cif-page" onload="init()">
+		<div class="container-fluid" style="border: none;  padding: 0; margin-bottom : 0;">
+			<div class="container">
+				
+				<!-- Panel used to enter test parameters -->
+				<!-- 	<div class="Panel">-->
+				<!-- Login -->
+				<div class="login__block active" id="l-login" style="background-color: #FAFAFA; border: none;">				
+
+					<div class="login__block__body">
+						<div class="form-group text-center" id="cliente-off">
+							<img src="svg/nice.svg" />  
+						</div>										
+						<div class="slds-col slds-size_1-of-1" id="tempochamada">
+							<h1 class="call-duration-count text-center" id="call-duration-count">00:00:00</h1>
+							<p class="call-duration-text text-center">Tempo de chamada</p>
+						</div>
+			
+						<div class="form-group">
+							<input type="text" class="form-control text-center" style="color: black;" placeholder="username" value="" id="TXT_AGENT">
+						</div>
+						</div>
+	                <div>
+                        <button type="submit" class="btn" id="BT_LOGIN" onclick="Login()">Login</button>
+						<!--<div class="form-group  col-md-12">-->
+							<input class="form-control" type="text" readonly=true value="" id="TXT_MESSAGES" style="color: red;" />
+						<!--</div>-->
+                    </div>
+				</div>
+			</div>				
+		</div>
+		<!-- Modal Make Call-->
+		<div class="modal fade" id="modalMakeCall" tabindex="-1" role="dialog" aria-labelledby="modalMakeCallLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header"></div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modalMakeCallLabel"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> DISCAR</h4>
+					<div class="modal-body">
+						<div class="row col-md-12">
+							<div class="form-group">
+								<label  for="INPUT_CALL" class="control-label col-md-3">Discagem Manual</label>
+								<div class="col-md-12">
+									<input id="INPUT_CALL" type="text" placeholder="número"></input>
+								</div>
+								<label class="control-label col-md-3">Lista de Destinos</label>
+								<div class="col-md-12">
+									<select id="seltransf" class="control-label col-md-3" onchange="MatrizTranf()">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal" onclick="javascript:MakeCall(event);"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Discar</button>
+						<button type="button" class="btncancelar" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancela</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- END DIV MODAL MAKE CALL -->
+		
+		<!-- Modal Pause -->
+		<div class="modal fade" id="modalPause" tabindex="-1" role="dialog" aria-labelledby="modalPauseLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modalPauseLabel"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pausa</h4>
+				<p>Motivos de Pausa</p>
+			  </div>					  
+			  <div class="modal-body">
+					<div class="form-group">
+						<!--<label>Motivo de Pausa</label>-->
+						<select id="selreason" class="col-md-12" onchange="Pause()">
+							<option value=""></option>
+						</select>
+					</div>
+				<div class="clearfix"></div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancela</button>
+			  </div>
+			</div>
+		  </div>
+		</div><!-- END DIV MODAL PAUSE CALL -->
+		<!--<iframe id="frameq" src="chat-bootstrap\index.html" frameborder="0"  height="400px" width="300px"></iframe>-->
+		<!--
+		<div class="padding"  id="formchat">
+			<div class="row container d-flex justify-content-center">
+			  <div class="col-md-4">
+				<div class="box box-warning direct-chat direct-chat-warning">
+				  <div class="box-header with-border">
+				  </div>
+					<div class="box-body">
+					  <div class="direct-chat-messages">
+					  </div>
+					</div>
+					  <div class="box-footer">
+						  <div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control" id="input-agent" style="color: black;">
+							<span class="input-group-btn">
+							<button type="button" class="btn btn-chat-warning btn-chat-flat" id="send-agent" onclick="sendchat(ContactID)">Send</button>
+							</span>
+						  </div>
+					  </div>
+				</div>
+			  </div>
+			</div>
+		</div>	  
+		
+		<div class="padding"  id="formchat2">
+			<div class="row container d-flex justify-content-center">
+			  <div class="col-md-4">
+				<div class="box box-warning direct-chat direct-chat-warning">
+				  <div class="box-header with-border">
+				  </div>
+					<div class="box-body">
+					  <div class="direct-chat-messages">
+					  </div>
+					</div>
+					  <div class="box-footer">
+						  <div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control" id="input-agent" style="color: black;">
+							<span class="input-group-btn">
+							<button type="button" class="btn btn-chat-warning btn-chat-flat" id="send-agent" onclick="sendchat(ContactID)">Send</button>
+							</span>
+						  </div>
+					  </div>
+				</div>
+			  </div>
+			</div>
+		</div>	
+		-->
+	</body>
+	<script src="./js/toolbarnice_teste.js?versaoo=46" type="text/javascript"></script>
+	<script src="./js/customcif.js?version=109" type="text/javascript"></script>
+	<script src="./js/chat.js?versaoo=182" type="text/javascript"></script>
+</html>

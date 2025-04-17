@@ -1,0 +1,390 @@
+﻿<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="author" content="Betta"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Betta CTI Toolbar</title>
+		<!-- MS Dynamics -->
+			<!-- script type="text/javascript" src="js/msdyn_ciLibrary.js" data-crmurl="https://org4ca53dec.crm2.dynamics.com/" data-cifid="CIFMainLibrary"></script -->
+		<script type="text/javascript" src="js/msdyn_ciLibrary.js" data-crmurl="https://orgcb2c6e7c.crm2.dynamics.com/" data-cifid="CIFMainLibrary"></script>
+		
+        <script src="js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+        <!-- App functions and actions -->
+        <script src="js/app.min.js?versao=1"></script>
+        <!-- App styles -->
+        <!--<link rel="stylesheet" href="css/app.min.css"> -->
+		
+        <link rel="stylesheet" href="css/font-awesome.min.css"></link>   
+		<link rel="stylesheet" href="css/toolbar.css"></link> 
+		<link rel="stylesheet" href="css/chat.css"></link>
+		<link rel="stylesheet" href="css/style.css"></link> 		
+		<script src="js/BettaCTINICE.js?version=47"></script>
+		<script src="js/config.js?versao=5" type="text/javascript"></script>
+        <!--<script src="js/opencti_min.js" type="text/javascript"></script>-->
+        <script src="js/easytimer.min.js" type="text/javascript"></script>
+		<!--<script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+		<!--<script src="https://kit.fontawesome.com/47ee8ca68b.js" crossorigin="anonymous"></script>-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+	</head>
+	<body id="cif-page">
+		<div class="container-fluid" style="border: none;  padding: 0; margin-bottom: 0;">
+			<div class="container">
+				<!-- Panel used to enter test parameters -->
+				<!-- 	<div class="Panel">-->
+				<!-- Login -->
+				<!-- INICIO HEADER (CABEÇALHO PRINCIPAL) -->
+				<div class="header-tool">
+					<input class="form-control-welcome" type="text" readonly=true value="" id="TXT_AGENT_NAME" />
+					<p id="TXT-LOGIN-OFF" class="text-header">sessão não iniciada</p>
+					<p id="dinamicStatus" class="menu-header" style="cursor: pointer; color: #b71c1c;"><i id="div-dinamicStatus" class="fas fa-light fa-circle-xmark"></i></p>
+				</div>
+				<div class="main" id="MAIN" >
+					<!--FIM HEADER-->
+					<!-- INICIO TELA LOGIN -->
+					<div id="main-tool" class="main-tool" style="display: block;">
+						<section class="content-login">
+						<p>Inicie a sessão para acessar o atendimento</p>
+						<div>
+							<div>
+								<label for="TXT_AGENT">login</label>
+								<input type="text" value="" id="TXT_AGENT" class="input-login" placeholder=" ">
+							</div>
+						<!--<div>
+							<label for="senha">senha</label>
+							<input type="password" name="" id="senha" placeholder=" ">
+						</div>-->
+						</div>
+						<button type="submit" class="btnLogar" id="BT_LOGIN" onclick="Login()">iniciar sessão</button>
+						</section>
+					</div><!-- FIM TELA LOGIN -->
+					<!-- INICIO TELA BEM-VINDO -->
+					<div id="main-panel" class="main-panel" style="display: none;">
+						<!-- INICIO SECTION TELA -->
+						<section class="tela">
+							<!-- INICIO SECTION BEM VINDO -->
+							<section class="content-logado" id="SCREEN-WELCOME" style="display: block;">
+								<!-- INICIO MODAL CONFIG -->								
+								<div class="modal-janela" id="modal-janela">
+									<button id="btn-dsp">
+										<i id="btn-dsp-disp" style="font-size: 23px; color: green;" class="fas fa-thin fa-circle-check"></i>
+										<p style="font-size: 15px;" onclick="javascript:Ready();">disponível</p>
+									</button>
+									<button id="btn-sair">
+										<i style="font-size: 23px;" class="fas fa-thin fa-arrow-right-from-bracket"></i>
+										<p id="btn-logout-modal" style="margin-right: 37px; font-size: 15px;" onclick="Logout()">sair</p>
+									</button>
+								</div>
+								<!-- FIM MODAL CONFIG -->
+								<div id="div-welcome">
+									<p id="agent-status" style="color: #706A66;">bem vindo</p>
+								</div>
+								<div class="div-out-pause" id="div-out-pause" >
+									<div class="pause-content">
+										<div class="pause-info">
+											<p class="count-out-pause">00:00:00</p>
+											<p id="agent-status-pause" style="color: #706A66;"></p>
+										</div>
+										<button onclick="OutPause()" class="btn-out-pause">sair da pausa</button>
+									</div>
+								</div>
+								<!-- INICIO NOTIFY -->
+								<div class="aviso-pausa" id="div-spam-pause">
+									<p id="TEXT_NOTIFY" >pausa encerrada!</p>
+									<i onclick="CloseWarning()" style="color: white; margin-top: 5px; cursor: pointer; margin-left: 26px;" class="fas fa-regular fa-xmark"></i>
+								</div>
+								<div class="btns-call">
+									<button>
+										<div onclick="MenuPausa()">
+											<i class="fas fa-solid fa-pause"></i>
+											<p>pausa</p>
+										</div>
+									</button>
+									<button>
+										<div onclick="MenuOutbound()" >
+											<i class="fa-solid fa-phone-volume"></i>
+											<p>contato ativo</p>
+										</div>
+									</button>
+									<button>
+										<div onclick="MenuConfig()">
+											<i class="fa-regular fa-gear"></i>
+											<p>configurações</p>
+										</div>
+									</button>
+									<button>
+										<div class="notAtivate" >
+											<i class="fas fa-regular fa-address-book"></i>
+											<p>histórico</p>
+										</div>
+									</button>
+									<button>
+										<div class="notAtivate" >
+											<i class="fa-sharp fa-solid fa-comment"></i>
+											<p>sms</p>
+										</div>
+									</button>
+								</div>
+							</section>
+							<!-- FIM SECTION BEM VINDO -->
+							<!-- INICIO SECTION TELA CONFIG -->
+							<section class="config" id="SCREEN-CONFIG">
+								<div class="outbound-header">
+									<div class="back-button" onclick="Arrowback('voltar-menu')">
+										<i class="fa-solid fa-chevron-left"></i>
+									</div>
+									<p>Configurações</p>
+								</div> 
+								<div style="background-color: #6666662b; width: 85%; height: 54px; margin: 21px; border: 1px solid #80808045; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									<h4 style="margin: 2px;">Numéro da versão</h4>
+									<p id="CHAT-VERSION" style="margin: 0;"></p>
+								</div>
+							</section>
+							<!-- FIM SECTION TELA CONFIG -->
+							<!-- INICIO SECTION TELA OUTBOUND -->
+							<section class="outbound" id="SCREEN-OUTBOUND">
+								<div class="outbound-header">
+									<div class="back-button" onclick="Arrowback('voltar-menu')">
+										<i class="fa-solid fa-chevron-left"></i>
+									</div>
+									<p>contato ativo</p>
+								</div>
+							<div class="outbound-content">
+								<div class="phone-display">
+									<input type="text" id="phone-number" readonly
+										placeholder="Digite o DDD + Número">
+								</div>
+								<div class="numpad">
+									<button class="numpad-key" onclick="appendNumber('1')">1</button>
+									<button class="numpad-key" onclick="appendNumber('2')">2</button>
+									<button class="numpad-key" onclick="appendNumber('3')">3</button>
+									<button class="numpad-key" onclick="appendNumber('4')">4</button>
+									<button class="numpad-key" onclick="appendNumber('5')">5</button>
+									<button class="numpad-key" onclick="appendNumber('6')">6</button>
+									<button class="numpad-key" onclick="appendNumber('7')">7</button>
+									<button class="numpad-key" onclick="appendNumber('8')">8</button>
+									<button class="numpad-key" onclick="appendNumber('9')">9</button>
+									<button class="numpad-key" onclick="appendNumber('*')">*</button>
+									<button class="numpad-key" onclick="appendNumber('0')">0</button>
+									<button class="numpad-key" onclick="appendNumber('#')">#</button>
+								</div>
+								<div class="numpad-actions">
+									<button class="clear-btn" onclick="clearNumber()">limpar</button>
+									<button class="call-btn" onclick="makeOutboundCall()">efetuar chamada</button>
+								</div>
+							</div>								
+							</section>
+							<!-- FIM SECTION TELA OUTBOUND -->
+							<!-- INICIO SECTION TELA PAUSE -->
+							<section class="pausa" id="SCREEN-PAUSA">
+								<div class="outbound-header">
+									<div class="back-button" onclick="Arrowback('voltar-menu')">
+										<i class="fa-solid fa-chevron-left"></i>
+									</div>
+									<p>Pausa</p>
+								</div>                     
+								<!--<ul id="btns-reason">-->
+								<ul id="agentstateui-0stateList" class="agent-state" role="listbox" data-i18n="[aria-label]AgentState" aria-label="Estado do Agente">
+									
+								</ul>
+							</section>
+							<!-- FIM SECTION TELA PAUSE -->
+							<!-- INICIO SECTION TELA PAUSE TIMER -->
+							<section class="pausa-cron" id="SCREEN-TIMERPAUSE">
+								<div class="outbound-header">
+									<div class="back-button" onclick="Arrowback('voltar-menu')">
+										<i class="fa-solid fa-chevron-left"></i>
+									</div>
+									<p>Pausa</p>
+								</div>              
+								<div>       
+									<h1 class="call-count-internal-timer" id="call-count-internal-timer">00:00:00</h1>        
+								</div> 
+								<div class="div-btn-pause">
+									<button onclick="OutPause()" id="btn-sairpausa">sair da pausa</button>   
+								</div>
+							</section>
+							<!-- FIM SECTION TELA PAUSE TIMER -->
+							<!-- INICIO SECTION TELA EM CHAMADA -->
+							<section class="content-logado" id="SCREEN-INCALL">
+								<!-- INICIO NOTIFY -->
+								<div class="aviso-pausa" id="div-spam-mute">
+									<p id="TEXT_NOTIFY" >mudo desativado!</p>
+									<i onclick="CloseWarning()" style="color: white; margin-top: 5px; cursor: pointer; margin-left: 26px;" class="fas fa-regular fa-xmark"></i>
+								</div>
+								<div class="aviso-pausa" id="div-spam-hold">
+									<p >espera encerrada!</p>
+									<i onclick="CloseWarning()" style="color: white; margin-top: 5px; cursor: pointer; margin-left: 26px;" class="fas fa-regular fa-xmark"></i>
+								</div>
+								<!-- END NOTIFY -->
+								<p id="strAniInCall" style="margin-bottom: 0; color: #56504C;"></p>
+								<h1 style="margin-top: 5px; color: #56504C;" class="call-duration-count text-center" id="call-duration-count">00:00:00</h1>
+								<button onclick="OnHangupClick(event)" class="btn-out-pause" style="position: fixed;left: 175px;height: 23px;padding: 0;width: 100px;top: 52px;">Desligar</button>
+								<button id="btn-transferVoice" onclick="OnTransferClick(event)" class="btn-out-pause" style="position: fixed;left: 175px;top: 78px;padding: 0;width: 100px;height: 24px;/* display: none; */">Transferir</button>
+								<div class="btns-call">
+									<button>
+										<div id="div-btn-mute" onclick="StartMute(event)">
+											<i id="icon-btn-mute" class="fas fa-light fa-microphone" style="color: rgb(45, 155, 213);"></i>
+											<p id="p-btn-mute">mudo</p>
+										</div>
+									</button>
+									<button id="BT_TRANSFERIR">
+										<div onclick="InitTransfer()">
+											<i class="fas fa-solid fa-phone"></i>
+											<p>transferir</p>
+										</div>
+									</button>
+									<button id="BT_ESPERA">
+										<div id="div-btn-espera" onclick="StartEspera()">
+											<i id="icon-btn-espera" class="fas fa-light fa-circle-pause" style="color: rgb(45, 155, 213);"></i>
+											<p id="p-btn-espera">espera</p>
+										</div>
+									</button>
+									<button>
+										<div onclick="MenuPausa()">
+											<i class="fas fa-solid fa-pause"></i>
+											<p>pausa</p>
+										</div>
+									</button>
+                                    <button id="BT_PESQUISA">
+										<div onclick="UraPesquisa()">
+											<i class="fa-solid fa-magnifying-glass"></i>
+											<p>pesquisa</p>
+										</div>
+									</button>
+                                    <button>
+										<div onclick="UraAutenticadora()">
+											<i class="fas fa-solid fa-lock"></i>
+											<p>aunteticadora</p>
+										</div>
+									</button>
+									<button>
+										<div onclick="UraTeclado()">
+											<i class="fa-solid fa-keyboard"></i>
+											<p>Teclado</p>
+										</div>
+									</button>
+								</div>
+							</section>
+							<section class="content-transfer" id="SCREEN_TRANSFER" style="display: none;"  >
+								<div class="div-voltar-transfer">
+									<i id="voltar-transfer" onclick="Arrowback(this.id)" style="font-size: 17px; margin-left: 5px; cursor: pointer; margin-top: 4px;" class="fa-solid fa-chevron-left"></i>
+									<p style="margin-left: 7px;">transferir</p>
+								</div>
+								<div class="select-transfer">				
+									<div class="div-option-transfer" >
+										<span id="top-transfer">transferir para atendimento</span>
+										<select id="select-transfer-itau" class="option-transfer" onChange="ValidateTransfer('true')">
+											<option value=""></option>
+										</select>
+									</div>
+									<div id="OutboundSkillsListDiv" class="div-option-transfer" style="margin-top: 25px; display: none;">
+										<span id="top-transfer">Selecione um skill de saída:</span>
+										<select id="OutboundSkillsList" class="option-transfer">
+											
+										</select>
+									</div>
+								</div>
+
+								<div class="div-transfer-btn" >
+									<button class="btn-transfer" style="margin-top: 110px; margin-bottom: 5px;" onclick="ValidateTransfer('false')" id="btn-transfer">Transferir</button>  
+								</div>  
+							</section>
+							<!-- INICIO SECTION TELA DTMF -->
+							<section id="SCREEN-DTMF" class="DTMF-SCREEN" style="display: none;">
+								<div class="outbound-header">
+									<div class="back-button" onclick="Arrowback('voltar-transfer')">
+										<i class="fa-solid fa-chevron-left"></i>
+									</div>
+									<p>Teclado DTMF</p>
+								</div>
+								<div class="dtmf-content">
+									<div class="dtmf-display">
+										<span id="dtmf-sequence"></span>
+									</div>
+									<div class="dtmf-numpad">
+										<button class="dtmf-key" onclick="sendDTMF('1')">1</button>
+										<button class="dtmf-key" onclick="sendDTMF('2')">2</button>
+										<button class="dtmf-key" onclick="sendDTMF('3')">3</button>
+										<button class="dtmf-key" onclick="sendDTMF('4')">4</button>
+										<button class="dtmf-key" onclick="sendDTMF('5')">5</button>
+										<button class="dtmf-key" onclick="sendDTMF('6')">6</button>
+										<button class="dtmf-key" onclick="sendDTMF('7')">7</button>
+										<button class="dtmf-key" onclick="sendDTMF('8')">8</button>
+										<button class="dtmf-key" onclick="sendDTMF('9')">9</button>
+										<button class="dtmf-key" onclick="sendDTMF('*')">*</button>
+										<button class="dtmf-key" onclick="sendDTMF('0')">0</button>
+										<button class="dtmf-key" onclick="sendDTMF('#')">#</button>
+									</div>
+								</div>
+							</section>
+							<!-- FIM SECTION TELA DTMF -->
+							<!--<section id="section-confirmar-transfer" >
+								<div id="div-confirmar-transfer" >
+									<p class="text-confirm-transfer" >Confirmar transferência de chamada</p>
+									<p id="TEXT_TRANSFER" class="text-confirm-transfer2" ></p>
+								</div>
+								<div class="div-transfer-btn" >
+									<button style="margin-top: 270px; margin-bottom: 5px;" class="btn-transfer" onclick="MatrizTranf()" id="btn-transfer">Transferir</button> 
+									<button class="btn-transfer" onclick="CancelTransfer()" id="btn-transfer">Cancelar</button>
+								</div> 
+							</section>-->
+							<section class="pausa" id="SCREEN-TAB">
+								<div class="inicio-tab">
+									<p style="font-size: 20px;">Disposição (obrigatório)</p>
+								</div>                     
+								<div id="seldisposition" class="btn-pausas">
+									<button id="no-disposition" ></button>
+								</div>
+							</section>
+							<!-- FIM SECTION TELA EM CHAMADA -->
+						</section>
+						<!-- FIM SECTION TELA -->
+					</div>
+					<!-- FIM TELA BEM-VINDO -->
+					<div class="voz-sessions">
+					  
+					</div>
+				</div>
+				<!--Fim Div Main-->
+			</div>
+			<div class="padding" id="formchat">
+			<div class="row container d-flex justify-content-center">
+			  <div class="col-md-4">
+				<div class="box box-warning direct-chat direct-chat-warning">
+				  <div class="box-header with-border" style="display:flex; justify-content: space-between;" >
+					<button onclick="encerraChat()" class="btn-encerrar-chat" >Encerrar</button>
+					<button onclick="OpenModalChat()" class="btn-transfer-chat" >Transferir</button>
+					<dialog class="dialog-chat-transfer" >
+					<button onclick="closeModalChat()" class="close-transfer-chat">X</button>
+					<div class="div-transfer-chat">
+						<span id="top-transfer">Transferir para atendimento</span>
+						<select id="select-transfer-chat" class="option-transfer-chat">
+							<option disabled selected value>-- Selecione um Skill --</option>
+						</select>
+						<button onclick="TransferChat()" class="btn-confirm-transfer-chat">Transferir</button>
+					</div>
+					</dialog>
+				  </div>
+					<div class="box-body">
+					  
+					</div>
+					  <div class="box-footer" style="bottom: -55px">
+						  
+					  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <!--NEW -->
+		  <div id="loading-overlay">
+			<div class="loader"></div>
+		  </div>
+		</div>
+		<!--INICIO Div CHAT-->
+	</body>
+	<script src="./js/toolbarnice.js?versaoo=100" type="text/javascript"></script>
+	<script src="./js/customcif.js?version=120" type="text/javascript"></script>
+	<script src="./js/chat.js?versaoo=195" type="text/javascript"></script>
+</html>

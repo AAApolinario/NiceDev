@@ -1,0 +1,12 @@
+{
+  "MatrizTransf": [
+    {
+      "destino": "RS CHAT",
+      "id": "10571981"
+    },
+	{
+      "destino": "AD_Skill_Chat",
+      "id": "10571978"
+    }
+  ]
+}
